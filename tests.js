@@ -91,6 +91,8 @@ var test_1_0 = function(description){
     var results = [];
     var result;
     var i = 0;//<- counter
+    var frequencies = [0, 0, 0, 0, 0];
+    var y = "";
 
 
     return Promise.resolve(() => {
@@ -99,8 +101,7 @@ var test_1_0 = function(description){
       assert.equal(typeof(iterations), "number");
       assert(iterations > 0);
       for (;i < iterations;i++) {
-        result = generate_UUID();
-        console.log("result:", result);
+        result = generate_UUID();//is_Debug_Mode);
         // ? use RegEx for format check ?
         //"f47ac10b-58cc-4372-a567-0e02b2c3d479"
         // must be string
@@ -109,6 +110,24 @@ var test_1_0 = function(description){
         // total string length == 8 + 4 * 3 + 12 + 4 = 36
         // each group consist only of `hexadecimal digits` [0-9a-f]
         //TODO check that AssertionError: 31 == 32 <- length is wrong
+        ///> probability check for {8, 9, 10, 11} must be close to 1/4
+        y = result[19];
+        if (y == '8') {
+          //frequencies[0] = frequencies + 1;
+          frequencies[0] += 1;
+        } else if (y == '9') {
+          //frequencies[0] = frequencies + 1;
+          frequencies[1] += 1;
+        } else if (y == 'a') {
+          //frequencies[0] = frequencies + 1;
+          frequencies[2] += 1;
+        } else if (y == 'b') {
+          //frequencies[0] = frequencies + 1;
+          frequencies[3] += 1;
+        } else {
+          frequencies[4] += 1;
+        }
+        console.log("result:", result, frequencies);
         //assert.equal(result.length, 32);
         assert.equal(typeof(result), "string");
       }
@@ -117,7 +136,7 @@ var test_1_0 = function(description){
   };
 }("test 1.0: must return correct UUID according to Version 4 UUIDs scheme")
 //(... params, expected_Results)
-(50)
+(1000)
 ;
 
 /* jshint laxcomma: true */

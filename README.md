@@ -11,13 +11,14 @@ deploy it to Heroku.
   _keep_/_preserve_ **polls** and
   come back later to _access_ them.
   2. an _authenticated_ user can
-  _share_ its **polls** with friends (get specific url).
+  _share_ its **polls** with friends
+  (get specific url).
   3. an _authenticated_ user can
   see the _aggregate results_ of its **polls**.
   4. an _authenticated_ user can
   _delete_ his/her **polls**.
   5. an _authenticated_ user can
-  _create_ a **poll**.
+  _create_ a **poll**
   with (almost) any (reasonable) number of possible _items_.
   6. any user (_authenticated_ or _not_) can
   _see_ and _vote_ on everyone's **polls**.

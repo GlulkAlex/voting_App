@@ -17,12 +17,13 @@
 "use strict";
 
 ///>>> helper
+///> using info / code from http://blog.tompawlak.org/generate-random-values-nodejs-javascript
 function random_Bucket(
   ///> interval start
-  lower_Limit//: number = 0
+  lower_Limit/*: number = 0 */
   ///> interval end
-  ,upper_Limit//: number = 1
-  ,is_Debug_Mode//: ?boolean //<- optional
+  ,upper_Limit/*: number = 1*/
+  ,is_Debug_Mode/*: ?boolean *///<- optional
 ) /*: number */{
   //assert(lower_Limit < upper_Limit);
 
@@ -32,9 +33,21 @@ function random_Bucket(
   ///> for {0, 2} => {0, 1, 2} -> 3
   var buckets /*: number */= upper_Limit - lower_Limit + 1;
   var rand_Float /*: number */= Math.random();
-  var bucket_Float /*: number */= rand_Float * (buckets - 1);
-  var bucket /*: number */= Math.round(bucket_Float);
-  //var bucket = Math.round(buckets % (Math.random() * buckets));
+  //var bucket_Float /*: number */= rand_Float * (buckets - 1);
+  var bucket_Float /*: number */= rand_Float * (buckets);
+  ///>DONE does this creates even distribution ???
+  ///> not even close
+  //[173, 328, 323, 176 ].reduce( (prev, curr) => prev + curr ); -> 1000
+  //[ 138, 243, 246, 241, 132 ] -> so use .floor instead of .round
+  //var bucket /*: number */= Math.round(bucket_Float);
+  //[ 256, 248, 249, 247, 0 ] for 1000
+  var bucket /*: number */= Math.floor(bucket_Float);
+  //[ 442, 396, 162, 0 ]
+  //var bucket/*: number */ = Math.round(buckets % (Math.random() * (buckets - 1)));
+  //[ 451, 439, 110, 0 ]
+  //var bucket/*: number */ = Math.round(buckets % (Math.random() * buckets));
+  //[ 354, 344, 94, 0, 208 ]
+  //var bucket/*: number */ = Math.round(buckets % (Math.random() * (buckets + 1)));
   //"".concat(
   if (is_Debug_Mode) {console.log(
     {
@@ -46,7 +59,7 @@ function random_Bucket(
       ,bucket: bucket
       ,result: lower_Limit + bucket
     }
-  )}
+  );}
 
 
   return lower_Limit + bucket;
@@ -91,7 +104,9 @@ Version 4 UUIDs have the `form`:
 */
 ///>>> ES modules
 //export
-function generate_UUID()/*: string*/ {
+function generate_UUID(
+  is_Debug_Mode/*: ?boolean *///<- optional
+)/*: string*/ {
   var place_Holder/*: Array<string>*/ = [
     "xxxxxxxx",//.length -> 8
     "xxxx",//.length -> 4
@@ -117,16 +132,24 @@ function generate_UUID()/*: string*/ {
   //var seq_3/*: string*/ = Math.random().toString(16).slice(2, 2 + 12);
   //> result: 35a53304-41fc-41.2-8c02-9d8c67028c00
   //> too many trailing '0' & '41.2' <- ??? whf ???
-  var hex_Sequence/*: string*/ = (Math.random() * ORDER_SHIFT)
-    .toString(16)
+  var hex_Sequence/*: string*/ = ""
     .concat(
-      (Math.random() * ORDER_SHIFT).toString(16)
-      ,(Math.random() * ORDER_SHIFT).toString(16)
+      //(Math.random() * ORDER_SHIFT).toString(16)
+      Math.random().toString(16).slice(2)
+      ,Math.random().toString(16).slice(2)
+      ,Math.random().toString(16).slice(2)
+      ,Math.random().toString(16).slice(2)
     )
   ;
   const LOWER_LIMIT = 8;
   const UPPER_LIMIT = 11;
 
+  if (is_Debug_Mode) {console.log(
+  {
+    hex_Sequence: hex_Sequence
+    ,length: hex_Sequence.length
+  }
+  );}
   place_Holder[0] = hex_Sequence.slice(0, 8);
   place_Holder[1] = hex_Sequence.slice(8, 8 + 4);
   place_Holder[2] = '4' + hex_Sequence.slice(8 + 4, 8 + 4 + 3);
