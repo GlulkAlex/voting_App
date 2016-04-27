@@ -117,7 +117,7 @@ var test_1_0 = function(description){
   };
 }("test 1.0: must return correct UUID according to Version 4 UUIDs scheme")
 //(... params, expected_Results)
-(20)
+(50)
 ;
 
 /* jshint laxcomma: true */

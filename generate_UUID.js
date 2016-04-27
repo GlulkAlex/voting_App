@@ -107,22 +107,33 @@ function generate_UUID()/*: string*/ {
   //parseInt(11).toString(16); -> 'b'
   //var Y_ENUM/*: Array<string|number>*/ = [8, 9, 'A', 'B'];
   var new_UUID/*: string*/ = "";
+  const ORDER_SHIFT = Math.pow(10, 18);
   //"0.bc58b36333c7d"
   //Math.random().toString(16).length; -> 15 == 2 + 13
   //TODO seq_1.length must be strictly equal to 8
-  var seq_1/*: string*/ = Math.random().toString(16).slice(2);
-  var seq_2/*: string*/ = Math.random().toString(16).slice(2, 2 + 6);
+  //var seq_1/*: string*/ = Math.random().toString(16).slice(2);
+  //var seq_2/*: string*/ = Math.random().toString(16).slice(2, 2 + 6);
   //TODO seq_3.length must be strictly equal to 12
-  var seq_3/*: string*/ = Math.random().toString(16).slice(2, 2 + 12);
+  //var seq_3/*: string*/ = Math.random().toString(16).slice(2, 2 + 12);
+  //> result: 35a53304-41fc-41.2-8c02-9d8c67028c00
+  //> too many trailing '0' & '41.2' <- ??? whf ???
+  var hex_Sequence/*: string*/ = (Math.random() * ORDER_SHIFT)
+    .toString(16)
+    .concat(
+      (Math.random() * ORDER_SHIFT).toString(16)
+      ,(Math.random() * ORDER_SHIFT).toString(16)
+    )
+  ;
   const LOWER_LIMIT = 8;
   const UPPER_LIMIT = 11;
 
-  place_Holder[0] = seq_1.slice(0, 8);
-  place_Holder[1] = seq_1.slice(-4);
-  place_Holder[2] = '4' + seq_2.slice(0, 3);
+  place_Holder[0] = hex_Sequence.slice(0, 8);
+  place_Holder[1] = hex_Sequence.slice(8, 8 + 4);
+  place_Holder[2] = '4' + hex_Sequence.slice(8 + 4, 8 + 4 + 3);
   //place_Holder[3] = 'a' + seq_2.slice(-3);
-  place_Holder[3] = parseInt(random_Bucket(LOWER_LIMIT, UPPER_LIMIT)).toString(16) + seq_2.slice(-3);
-  place_Holder[4] = seq_3;
+  place_Holder[3] = parseInt(random_Bucket(LOWER_LIMIT, UPPER_LIMIT)).toString(16) +
+    hex_Sequence.slice(8 + 4 + 3, 8 + 4 + 3 + 3);
+  place_Holder[4] = hex_Sequence.slice(8 + 4 + 3 + 3, 8 + 4 + 3 + 3 + 12);
   new_UUID = place_Holder.join("-");
 
   return new_UUID;

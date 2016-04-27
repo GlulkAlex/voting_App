@@ -11,7 +11,7 @@ deploy it to Heroku.
   _keep_/_preserve_ **polls** and
   come back later to _access_ them.
   2. an _authenticated_ user can
-  _share_ its **polls** with friends.
+  _share_ its **polls** with friends (get specific url).
   3. an _authenticated_ user can
   see the _aggregate results_ of its **polls**.
   4. an _authenticated_ user can
@@ -24,7 +24,7 @@ deploy it to Heroku.
   7. any user (_authenticated_ or _not_) can
   _see_ the **polls** _results_ in **chart** form.
   8. an _authenticated_ user can
-  _create_ new options on a **poll** a poll.
+  _create_ new options on a **poll**.
 
 Live demo:
 ---
