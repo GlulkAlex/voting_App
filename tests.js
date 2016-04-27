@@ -93,6 +93,9 @@ var test_1_0 = function(description){
     var i = 0;//<- counter
     var frequencies = [0, 0, 0, 0, 0];
     var y = "";
+    //const reg_Ex_Pattern = /[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/;
+    //const reg_Ex_Pattern_2 = /([0-9]|[a-f]){8}-([0-9]|[a-f]){4}-4([0-9]|[a-f]){3}-[89ab]([0-9]|[a-f]){3}-([0-9]|[a-f]){12}/;
+    const reg_Ex_Pattern/*_3*/ = /^([0-9]|[a-f]){8}-([0-9]|[a-f]){4}-4([0-9]|[a-f]){3}-[89ab]([0-9]|[a-f]){3}-([0-9]|[a-f]){12}$/;
 
 
     return Promise.resolve(() => {
@@ -128,8 +131,10 @@ var test_1_0 = function(description){
           frequencies[4] += 1;
         }
         console.log("result:", result, frequencies);
-        //assert.equal(result.length, 32);
         assert.equal(typeof(result), "string");
+        //assert.equal(result.length, 32);
+        //assert.equal(reg_Ex_Pattern.test(result), true);
+        assert.ok(reg_Ex_Pattern.test(result));
       }
     }())
     ;
