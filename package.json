@@ -1,0 +1,36 @@
+{
+  "name": "api-file-metadata-microservice",
+  "version": "0.0.1",
+  "description": "Dynamic Web Application Projects: Voting App",
+  "main": "main.js",
+  "scripts": {
+    "test": "node tests.js",
+    "start": "node main.js"
+  },
+  "dependencies": {
+    "express": "4.13.4"
+  },
+  "engines": {
+    "node": "^4.2.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GlulkAlex/voting_App.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "web",
+    "dynamic",
+    "app",
+    "application",
+    "graphql",
+    "react",
+    "relay"
+  ],
+  "author": {
+    "name": "GlukAlex"
+  },
+  "license": "MIT",
+  "devDependencies": {}
+}
