@@ -405,6 +405,8 @@ var Pie_Chart = Vue.extend({
   template: [
     //'<canvas id="pie_Chart" width="400" height="400"></canvas>'
     '<vue-chart'
+      //ColumnChart
+      ,' v-bind:chart-type="chart_Type"'
       ,' v-bind:columns="columns"'
       ,' :rows="rows"'
       ,' :options="options"'
@@ -434,16 +436,31 @@ var Pie_Chart = Vue.extend({
     };
     */
     return {
-      columns: [{
+      ///> default:
+      //packages: ["corechart"]
+      ///> default: "LineChart"
+      ///> works
+      //chart_Type: "ColumnChart"
+      ///> donutchart works
+      chart_Type: "PieChart"
+      ///> Column 0,	Column 1
+      ///> Slice labels,	Slice values
+      ///> string,	number
+      ,columns: [
+        {
           'type': 'string',
           'label': 'Year'
-      }, {
+        }
+        , {
           'type': 'number',
           'label': 'Sales'
-      }, {
+        }
+        , {
           'type': 'number',
           'label': 'Expenses'
-      }],
+        }
+      ],
+      ///> Rows: Each row in the table represents a slice.
       rows: [
           ['2004', 1000, 400],
           ['2005', 1170, 460],
@@ -452,6 +469,20 @@ var Pie_Chart = Vue.extend({
       ],
       options: {
           title: 'Company Performance',
+          pieHole: 0.4,
+          is3D: true,
+          //legend: 'none',
+          //pieSliceText: 'label',
+          slices: {
+            ///> starting from zero index
+            //0: {offset: 0.2},
+            ///> it may be:
+            ///> lesser piece of two or more
+            ///> or bigger piece of all if there are more than two
+            1: {offset: 0.3},
+            //4: {offset: 0.4},
+            //5: {offset: 0.5},
+          },
           hAxis: {
               title: 'Year',
               minValue: '2004',
