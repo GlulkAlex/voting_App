@@ -112,7 +112,6 @@ var test_1_0 = function(description){
         // divided by '-' delimiter (4 total)
         // total string length == 8 + 4 * 3 + 12 + 4 = 36
         // each group consist only of `hexadecimal digits` [0-9a-f]
-        //TODO check that AssertionError: 31 == 32 <- length is wrong
         ///> probability check for {8, 9, 10, 11} must be close to 1/4
         y = result[19];
         if (y == '8') {
