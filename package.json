@@ -32,5 +32,8 @@
     "name": "GlukAlex"
   },
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {
+    "vue": "1.0.24",
+    "vue-charts": "0.1.14"
+  }
 }

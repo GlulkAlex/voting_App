@@ -395,27 +395,34 @@ var User_Polls_Page = Vue.extend({
     return user_Polls_Page_Data;
   }
 });
-
 // register
 //Vue.component('user-polls_page', User_Polls_Page);
 
+Vue.use(VueCharts);
 // define
 // a fragment instance (has: v-for)
 var Pie_Chart = Vue.extend({
   template: [
-    '<canvas id="pie_Chart" width="400" height="400"></canvas>'
+    //'<canvas id="pie_Chart" width="400" height="400"></canvas>'
+    '<vue-chart'
+      ,' v-bind:columns="columns"'
+      ,' :rows="rows"'
+      ,' :options="options"'
+    ,'></vue-chart>'
   ].join("")
   ///>>> ((mount | entry) point) | root
   /**/
-  ,replace: false
+  //,replace: false
   ,el: function () {
-    return '#app';
+    //return '#app';
+    return 'app';
   }
   /**/
   /**/
   ,data: function () {
     // filterBy poll_ID from app.com/polls/poll_ID route
     //return polls_Data;
+    /*
     return {
       ///> must be explicitly visible for | inside | within component's scope
       color_Names: color_Names
@@ -425,19 +432,54 @@ var Pie_Chart = Vue.extend({
         ,options: poll_1_Vote_Options
       }
     };
+    */
+    return {
+      columns: [{
+          'type': 'string',
+          'label': 'Year'
+      }, {
+          'type': 'number',
+          'label': 'Sales'
+      }, {
+          'type': 'number',
+          'label': 'Expenses'
+      }],
+      rows: [
+          ['2004', 1000, 400],
+          ['2005', 1170, 460],
+          ['2006', 660, 1120],
+          ['2007', 1030, 540]
+      ],
+      options: {
+          title: 'Company Performance',
+          hAxis: {
+              title: 'Year',
+              minValue: '2004',
+              maxValue: '2007'
+          },
+          vAxis: {
+              title: '',
+              minValue: 300,
+              maxValue: 1200
+          },
+          width: 900,
+          height: 500,
+          curveType: 'function'
+      }
+  };
   }
   ,created: function () {
     // `this` points to the vm instance
-    console.log('Pie_Chart is created: ' + this.poll_Data.caption);
+    console.log('Pie_Chart is created: ');// + this.poll_Data.caption);
   }
   ///> created -> compiled -> inserted into DOM | document -> ready
   ///> for deffered callbacks ?
   ,ready: function () {
     // `this` points to the vm instance
-    console.log('Pie_Chart is ready: ' + JSON.stringify(this.poll_Data.options[0]));
+    console.log('Pie_Chart is ready: ');// + JSON.stringify(this.poll_Data.options[0]));
     /*
     failed to render in plunker
-    */
+
     var ctx = document.getElementById("pie_Chart").getContext("2d");
     //'CanvasRenderingContext2D.webkitImageSmoothingEnabled' is deprecated.
     //Please use 'CanvasRenderingContext2D.imageSmoothingEnabled' instead.
@@ -465,7 +507,7 @@ var Pie_Chart = Vue.extend({
         }
       }
     );
-    /**/
+    */
   }
   /**/
   ///> view like, geter mostly, setter work is unclear
