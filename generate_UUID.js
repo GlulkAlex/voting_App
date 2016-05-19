@@ -165,7 +165,7 @@ function generate_UUID(
   //DONE seq_1.length must be strictly equal to 8
   //var seq_1/*: string*/ = Math.random().toString(16).slice(2);
   //var seq_2/*: string*/ = Math.random().toString(16).slice(2, 2 + 6);
-  //TODO seq_3.length must be strictly equal to 12
+  //DONE seq_3.length must be strictly equal to 12
   //var seq_3/*: string*/ = Math.random().toString(16).slice(2, 2 + 12);
   //> result: 35a53304-41fc-41.2-8c02-9d8c67028c00
   //> too many trailing '0' & '41.2' <- ??? whf ???
